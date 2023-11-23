@@ -1,39 +1,78 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
+## add your schema
 ```dart
-const like = 'sample';
+class MyApp extends HookWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FlSchemaProivder(
+      schema: {
+        'email': (value) {
+          return switch (value) {
+            final String text when RegExp(r'^\S+@\S+\.\S+$').hasMatch(text) =>
+              null,
+            _ => 'Invalid email address'
+          };
+        },
+      },
+      child: const MaterialApp(
+        home: Scaffold(
+          body: MyHome(),
+        ),
+      ),
+    );
+  }
+}
+
+class MyHome extends HookWidget {
+  const MyHome({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const FlFormBuilder(
+      child: Body(),
+    );
+  }
+}
 ```
 
-## Additional information
+# create FlFormTextEditingController and assign it to textField
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+class Body extends HookWidget {
+  const Body({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = useFlFormTextEditingController(
+      name: 'email_controller',
+      schemaName: 'email',
+    );
+
+    final isFormValid = useIsFormValid();
+    final formData = useFormData();
+
+    return Column(
+      children: [
+        TextFormField(
+          controller: controller,
+          decoration: InputDecoration(
+            errorText: controller.errorMessage,
+          ),
+        ),
+        FilledButton(
+          onPressed: !isFormValid ? null : () {},
+          child: const Text('Confirm'),
+        ),
+        Text(formData.toString()),
+      ],
+    );
+  }
+}
+```
+
+## Available Hooks
+- useFlFormTextEditingController: create auto dispose [FlFormTextEditingController]
+- useIsFormValid: check nearest [FlForm] to find out is valid or not
+- useFormData: get nearest [FlForm] data in Map format
+- useFormValue: get info of given [FlFormTextEditingController] name and return [FlFormzInput?]
