@@ -14,6 +14,10 @@ Map<String, FlFormzInput> useFormData() {
   return formNotifier.value.value;
 }
 
+FlFormzInput? useFormValue(String name) {
+  return useFormData()[name];
+}
+
 class _FlFormTextEditingControllerCreator {
   const _FlFormTextEditingControllerCreator();
   FlFormTextEditingController call({
