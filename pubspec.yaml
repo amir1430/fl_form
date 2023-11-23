@@ -1,0 +1,22 @@
+name: fl_form
+description: A new Flutter package project.
+version: 0.0.1
+homepage: null
+
+environment:
+  sdk: '>=3.1.4 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_hooks: ^0.20.3
+  formz: ^0.6.1
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^5.1.0
+
+flutter: null
