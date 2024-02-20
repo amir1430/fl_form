@@ -10,13 +10,6 @@ final class FlFormTextEditingController extends TextEditingController {
     this.form,
   }) {
     super.addListener(_listener);
-    final inheritedSchema = schema?.schema[schemaName];
-
-    form?.notifier.add(
-      text: text,
-      validator: inheritedSchema ?? validator!,
-      name: name,
-    );
   }
 
   FlFormTextEditingController.fromValue({
@@ -28,13 +21,6 @@ final class FlFormTextEditingController extends TextEditingController {
     this.form,
   }) : super.fromValue(value) {
     super.addListener(_listener);
-    final inheritedSchema = schema?.schema[schemaName];
-
-    form?.notifier.add(
-      text: text,
-      validator: inheritedSchema ?? validator!,
-      name: name,
-    );
   }
 
   final String name;
