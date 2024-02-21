@@ -27,6 +27,10 @@ final class FlFormNotifier extends ValueNotifier<FlFormData> {
       },
     );
 
+    if ((currentForm?.isPure ?? true) && !form.value.isPure && text.isEmpty) {
+      return;
+    }
+
     Future(() {
       value = {...value, form.key: form.value};
     });
@@ -42,6 +46,16 @@ final class FlFormNotifier extends ValueNotifier<FlFormData> {
           )
         else
           f.key: f.value,
+    };
+  }
+
+  void changeAllToPure() {
+    value = {
+      for (final f in value.entries)
+        f.key: FlFormzInput.pure(
+          name: f.value.name,
+          validation: f.value.validation,
+        ),
     };
   }
 

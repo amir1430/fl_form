@@ -18,6 +18,11 @@ FlFormzInput? useFormValue(String name) {
   return useFormData()[name];
 }
 
+FlForm? useFlForm() {
+  final context = useContext();
+  return FlForm.of(context);
+}
+
 class _FlFormTextEditingControllerCreator {
   const _FlFormTextEditingControllerCreator();
   FlFormTextEditingController call({

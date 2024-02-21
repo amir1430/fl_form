@@ -10,6 +10,7 @@ final class FlFormTextEditingController extends TextEditingController {
     this.form,
   }) {
     super.addListener(_listener);
+    _sub = _createSubscription();
   }
 
   FlFormTextEditingController.fromValue({
@@ -21,7 +22,9 @@ final class FlFormTextEditingController extends TextEditingController {
     this.form,
   }) : super.fromValue(value) {
     super.addListener(_listener);
+    _sub = _createSubscription();
   }
+  late final StreamSubscription<FlFormEvent>? _sub;
 
   final String name;
   final FlSchemaProivder? schema;
@@ -30,6 +33,17 @@ final class FlFormTextEditingController extends TextEditingController {
   final FlValidator? validator;
 
   String? get errorMessage => form?.notifier.value[name]?.displayError;
+
+  StreamSubscription<FlFormEvent>? _createSubscription() {
+    return form?.stream
+        .where(
+      (event) =>
+          event is FlFormTextEditingControllerToPure || event is FlFormToPure,
+    )
+        .listen((event) {
+      clear();
+    });
+  }
 
   void _listener() {
     final v = schema?.schema[schemaName];
@@ -51,6 +65,9 @@ final class FlFormTextEditingController extends TextEditingController {
   @override
   void dispose() {
     super.removeListener(_listener);
+    _sub = null;
+    _sub?.cancel();
+
     form?.notifier.remove(name);
 
     super.dispose();

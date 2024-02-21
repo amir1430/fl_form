@@ -24,3 +24,15 @@ final class FlFormzInput extends FormzInput<String, String>
 typedef FlValidator = String? Function(String value);
 typedef FlFormData = Map<String, FlFormzInput>;
 typedef FlSchemaData = Map<String, FlValidator>;
+
+sealed class FlFormEvent {}
+
+class FlFormToPure extends FlFormEvent {}
+
+class FlFormTextEditingControllerToPure extends FlFormEvent {
+  FlFormTextEditingControllerToPure({
+    required this.name,
+  });
+
+  final String name;
+}
