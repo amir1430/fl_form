@@ -24,7 +24,7 @@ final class FlFormTextEditingController extends TextEditingController {
     super.addListener(_listener);
     _sub = _createSubscription();
   }
-  late final StreamSubscription<FlFormEvent>? _sub;
+  late StreamSubscription<FlFormEvent>? _sub;
 
   final String name;
   final FlSchemaProivder? schema;
