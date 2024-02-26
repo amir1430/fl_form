@@ -1,6 +1,6 @@
 name: fl_formz
 description: Flutter text editing controller that can automatically validate form.
-version: 0.0.2
+version: 0.0.3
 repository: "https://github.com/amir1430/fl_form"
 
 environment:
