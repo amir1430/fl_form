@@ -1,4 +1,4 @@
-part of 'fl_form.dart';
+part of 'fl_formz.dart';
 
 class FlFormBuilder extends HookWidget {
   const FlFormBuilder({

@@ -1,10 +1,10 @@
-name: fl_form
+name: fl_formz
 description: A new Flutter package project.
 version: 0.0.1
-homepage: null
+repository: "https://github.com/amir1430/fl_form"
 
 environment:
-  sdk: '>=3.1.4 <4.0.0'
+  sdk: ">=3.1.4 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:

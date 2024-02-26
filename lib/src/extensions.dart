@@ -1,4 +1,4 @@
-part of 'fl_form.dart';
+part of 'fl_formz.dart';
 
 extension FlFormX on BuildContext {
   bool get isFormValid => FlForm.of(this).isValid;

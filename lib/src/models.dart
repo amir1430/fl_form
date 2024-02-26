@@ -1,4 +1,4 @@
-part of 'fl_form.dart';
+part of 'fl_formz.dart';
 
 final class FlFormzInput extends FormzInput<String, String>
     with FormzInputErrorCacheMixin<String, String> {
